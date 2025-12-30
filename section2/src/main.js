@@ -10,9 +10,11 @@ const canvas = document.querySelector("#three-canvas");
 // const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 const renderer = new THREE.WebGLRenderer({
   canvas,
+  antialias: true,
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+// Camera
 const scene = new THREE.Scene();
 // mesh가 near와 far 사이에 있고 시야각(fov) 안에 있어야 카메라에 보인다
 const camera = new THREE.PerspectiveCamera(
@@ -24,4 +26,14 @@ const camera = new THREE.PerspectiveCamera(
 
 // 포지션 설정 안해주면 기본 0,0,0
 camera.position.z = 5;
+camera.position.x = 2;
+camera.position.y = 2;
 scene.add(camera);
+
+// Mesh
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ color: "red" });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+renderer.render(scene, camera);
